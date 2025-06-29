@@ -1,0 +1,323 @@
+﻿@page
+@model ISKOpe.Pages.IndexModel
+@{
+    Layout = null; // Keep this as you explicitly don't want a layout file
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISKOpe - Home</title>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <style>
+        /* Add basic styling for recent items if not already in style.css */
+        .recent-item-card {
+            background-color: rgba(255, 255, 255, 0.8); /* Glassmorphism effect */
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex; /* Changed to block/flex for image only, but then flex for details */
+            flex-direction: column; /* Stack image and details */
+            align-items: center; /* Center content horizontally */
+            cursor: pointer; /* Indicate clickable */
+            overflow: hidden; /* Hide overflowing content during transitions */
+            position: relative; /* For absolute positioning of details */
+            height: auto; /* Allow height to adjust */
+            /* Added for search filtering transition and general card transition */
+            transition: all 0.4s ease;
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        .recent-item-image-wrapper {
+            width: 100%; /* Take full width of card */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px; /* Fixed height for the image display area */
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 10px; /* Space between image and details if they are separate */
+        }
+
+            .recent-item-image-wrapper img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Cover the area, may crop */
+                border-radius: 10px; /* Match wrapper */
+            }
+
+        .recent-item-details {
+            width: 100%;
+            padding-top: 10px; /* Space between image and details */
+            box-sizing: border-box;
+            opacity: 0; /* Initially hidden */
+            max-height: 0; /* Initially hidden */
+            overflow: hidden;
+            transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
+        }
+
+        .recent-item-card.show-details .recent-item-details {
+            opacity: 1;
+            max-height: 200px; /* Adjust to be larger than expected content height */
+        }
+
+        .recent-item-details h4 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #333;
+            text-align: center;
+        }
+
+        .recent-item-details p {
+            margin: 0 0 3px 0;
+            font-size: 0.9em;
+            color: #555;
+            text-align: center;
+        }
+
+        .item-status {
+            font-weight: bold;
+            color: #800000; /* Example color for emphasis */
+            text-transform: capitalize; /* "lost" or "found" */
+        }
+
+        /* Responsive grid for recent items */
+        .recent-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjust min-width as needed */
+            gap: 20px; /* Space between cards */
+        }
+
+
+        /* Adjustments for image-upload area */
+        .image-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .upload-label {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        #preview {
+            display: none;
+            margin-top: 10px;
+            width: 150px;
+            height: auto;
+            object-fit: contain;
+            max-width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+
+        .category-glass-card {
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .most-recent, .categories {
+            margin-bottom: 30px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .hide-card {
+            visibility: hidden;
+            opacity: 0;
+            transform: scale(0.95);
+            height: 0;
+            margin: 0;
+            padding: 0;
+            border: none;
+            overflow: hidden;
+        }
+
+        /* This is for the cards that don't match the search */
+        .filtered-out {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+            order: 99; /* push them to the bottom */
+            height: 0; /* Collapse height for filtered out items */
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body class="dashboard-bg">
+
+    <main>
+        <section class="most-recent">
+            <h2><span class="section-pill">Most Recent</span></h2>
+            <div class="recent-items">
+                @if (Model.RecentItems != null && Model.RecentItems.Any())
+                {
+                    @foreach (var item in Model.RecentItems)
+                    {
+                        <div class="recent-item-card" onclick="toggleDetails(this)">
+                            @* Added onclick here *@
+                            <div class="recent-item-image-wrapper">
+                                <img src="@item.ImagePath" alt="@item.ItemName" onerror="this.onerror=null;this.src='/Assets/placeholder.png';" />
+                            </div>
+                            <div class="recent-item-details">
+                                <h4>@item.ItemName</h4>
+                                <p><span class="item-status">@item.ItemStatus</span> - @item.Category</p>
+                                <p>Date: @item.Month @item.Day, @item.Year</p>
+                                <p>Location: @item.Location</p>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="no-items">No items have been posted yet.</p>
+                }
+            </div>
+        </section>
+
+        <section class="categories">
+            <h2><span class="section-pill">Categories</span></h2>
+            <div class="category-grid">
+                @{
+                    var categories = new[]
+                    {
+                                new { Page = "/electronicspanel", Image = "Electronics.png", Label = "Electronics" },
+                                new { Page = "/walletspanel", Image = "Wallets.png", Label = "Wallets" },
+                                new { Page = "/bagspanel", Image = "Bags.png", Label = "Bags" },
+                                new { Page = "/idpanel", Image = "IDs.png", Label = "IDs" },
+                                new { Page = "/documentspanel", Image = "Documents.png", Label = "Documents" },
+                                new { Page = "/bookspanel", Image = "Books.png", Label = "Books" },
+                                new { Page = "/clothingpanel", Image = "Clothing.png", Label = "Clothing" },
+                                new { Page = "/fashionpanel", Image = "Fashion Accessories.png", Label = "Fashion Accessories" },
+                                new { Page = "/jewelrypanel", Image = "Jewelry.png", Label = "Jewelry" },
+                                new { Page = "/otherspanel", Image = "Others.png", Label = "Others" }
+                                };
+
+                    foreach (var cat in categories)
+                    {
+                        <div onclick="location.href='@Url.Page(cat.Page)'" class="category-item">
+                            <img src="~/Assets/@cat.Image" alt="@cat.Label" class="icon">
+                            <p>@cat.Label</p>
+                        </div>
+                    }
+                }
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-taskbar">
+        <div class="taskbar-group-card">
+            <div class="taskbar-pill home-pill" onclick="location.href='@Url.Page("/Index")'" style="cursor:pointer;">
+                <span class="icon home-icon">
+                    <img src="~/Assets/Home.png" alt="Home" width="32" height="32" />
+                </span>
+                <span class="label">Home</span>
+            </div>
+            <div onclick="location.href='@Url.Page("/About")'" class="taskbar-pill about-pill" style="cursor:pointer;">
+                <span class="icon about-icon">
+                    <img src="~/Assets/About Us.png" alt="About Us" width="32" height="32" />
+                </span>
+                <span class="label">About Us</span>
+            </div>
+            <div class="taskbar-pill profile-pill" onclick="location.href='@Url.Page("/Profile")'" style="cursor:pointer;">
+                <span class="icon profile-icon">
+                    <img src="~/Assets/Profile.png" alt="Profile" width="32" height="32" />
+                </span>
+                <span class="label">Profile</span>
+            </div>
+        </div>
+
+        <div class="taskbar-search-card">
+            <div class="taskbar-search">
+                <button class="search-btn" aria-label="Search">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#800000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="7" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                </button>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search..." autocomplete="off" />
+            </div>
+        </div>
+
+        <div class="taskbar-add-card">
+            <button class="add-btn" aria-label="Add Post" onclick="location.href='@Url.Page("/Submit")'">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#800000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="16" />
+                    <line x1="8" y1="12" x2="16" y2="12" />
+                </svg>
+                <span class="label">Add</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle item details visibility
+        function toggleDetails(card) {
+            card.classList.toggle('show-details');
+        }
+
+        // Existing search functionality
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("searchInput");
+            const cards = document.querySelectorAll(".recent-item-card");
+            const noItemsMessage = document.querySelector('.most-recent .no-items');
+
+
+            searchInput.addEventListener("input", function () {
+                const query = searchInput.value.toLowerCase().trim();
+                let visibleItemsCount = 0;
+
+                cards.forEach(card => {
+                    const text = card.innerText.toLowerCase();
+                    if (text.includes(query)) {
+                        card.classList.remove("filtered-out");
+                        visibleItemsCount++;
+                    } else {
+                        card.classList.add("filtered-out");
+                    }
+                });
+
+                // Update "No items" message based on search results
+                if (noItemsMessage) {
+                    if (visibleItemsCount === 0 && query !== '') {
+                        noItemsMessage.style.display = 'block';
+                        noItemsMessage.textContent = 'No matching items found.';
+                    } else if (visibleItemsCount === 0 && query === '') {
+                        // If no items initially and no search query, show original message
+                        noItemsMessage.style.display = 'block';
+                        noItemsMessage.textContent = 'No items have been posted yet.';
+                    } else {
+                        // If items are visible, hide the message
+                        noItemsMessage.style.display = 'none';
+                    }
+                }
+            });
+            // Initial filter call in case the search input already has text (e.g., after a browser refresh)
+            searchInput.dispatchEvent(new Event('input')); // Trigger input event to filter on load
+        });
+    </script>
+    <script src="~/js/taskbar.js" asp-append-version="true"></script>
+
+</body>
+</html>

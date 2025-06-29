@@ -1,0 +1,315 @@
+﻿@page
+@model ISKOpe.Pages.FashionAccessoriesModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Fashion Accessories";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fashion Accessories - ISKOpe</title>
+    <link rel="stylesheet" href="~/css/style.css" />
+
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 100px;
+        }
+
+        .category-glass-card {
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px auto;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            padding-bottom: 20px;
+        }
+
+        .item-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            /* Added for search filtering transition */
+            transition: all 0.4s ease;
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        .item-image-wrapper {
+            width: 50%; /* smaller than full card width */
+            aspect-ratio: 1 / 1; /* ensures square shape */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background-color: #f2f2f2;
+        }
+
+            .item-image-wrapper img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* or "contain" if you prefer not cropping */
+                border-radius: 10px;
+            }
+
+        .item-details {
+            width: 100%;
+            padding-top: 10px;
+            box-sizing: border-box;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
+        }
+
+        .item-card.show-details .item-details {
+            opacity: 1;
+            max-height: 200px;
+        }
+
+        .item-details h4 {
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+
+        .item-details p {
+            margin: 0 0 3px 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .item-status {
+            font-weight: bold;
+            color: #800000;
+            text-transform: capitalize;
+        }
+
+        .items-section h2 {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: #800000;
+            font-size: 1.8em;
+        }
+
+        .no-items {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #777;
+            padding: 20px 0;
+        }
+
+        /* CSS for search filter */
+        .filtered-out {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+            order: 99; /* Pushes filtered items to the end of the grid */
+            height: 0; /* Collapses the height */
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    </style>
+
+</head>
+<body class="dashboard-bg">
+    <main>
+        <section class="category-glass-card">
+            <h1><span class="section-pill">Fashion Accessories</span></h1>
+
+            <section class="items-section">
+                <h2>Lost Items</h2>
+                <div class="items-grid">
+                    @if (Model.LostItems?.Any() == true)
+                    {
+                        foreach (var item in Model.LostItems)
+                        {
+                            <div class="item-card" onclick="toggleDetails(this)">
+                                <div class="item-image-wrapper">
+                                    <img src="@item.ImagePath" alt="@item.ItemName" onerror="this.onerror=null;this.src='/Assets/placeholder.png';" />
+                                </div>
+                                <div class="item-details">
+                                    <h4>@item.ItemName</h4>
+                                    <p><span class="item-status">@item.ItemStatus</span> - @item.Category</p>
+                                    <p>Date: @item.Month @item.Day, @item.Year</p>
+                                    <p>Last Seen: @item.Location</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p class="no-items">No lost fashion accessories have been posted yet.</p>
+                    }
+                </div>
+            </section>
+
+            <section class="items-section">
+                <h2>Found Items</h2>
+                <div class="items-grid">
+                    @if (Model.FoundItems?.Any() == true)
+                    {
+                        foreach (var item in Model.FoundItems)
+                        {
+                            <div class="item-card" onclick="toggleDetails(this)">
+                                <div class="item-image-wrapper">
+                                    <img src="@item.ImagePath" alt="@item.ItemName" onerror="this.onerror=null;this.src='/Assets/placeholder.png';" />
+                                </div>
+                                <div class="item-details">
+                                    <h4>@item.ItemName</h4>
+                                    <p><span class="item-status">@item.ItemStatus</span> - @item.Category</p>
+                                    <p>Date: @item.Month @item.Day, @item.Year</p>
+                                    <p>Found At: @item.Location</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p class="no-items">No found fashion accessories have been reported yet.</p>
+                    }
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <div class="bottom-taskbar">
+        <div class="taskbar-group-card">
+            <div class="taskbar-pill home-pill" onclick="location.href='@Url.Page("/Index")'" style="cursor:pointer;">
+                <span class="icon home-icon">
+                    <img src="~/Assets/Home.png" alt="Home" width="32" height="32" />
+                </span>
+                <span class="label">Home</span>
+            </div>
+            <div onclick="location.href='@Url.Page("/About")'" class="taskbar-pill about-pill" style="cursor:pointer;">
+                <span class="icon about-icon">
+                    <img src="~/Assets/About Us.png" alt="About Us" width="32" height="32" />
+                </span>
+                <span class="label">About Us</span>
+            </div>
+            <div class="taskbar-pill profile-pill" onclick="location.href='@Url.Page("/Profile")'" style="cursor:pointer;">
+                <span class="icon profile-icon">
+                    <img src="~/Assets/Profile.png" alt="Profile" width="32" height="32" />
+                </span>
+                <span class="label">Profile</span>
+            </div>
+        </div>
+
+        <div class="taskbar-search-card">
+            <div class="taskbar-search">
+                <button class="search-btn" aria-label="Search">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#800000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="7" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                </button>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search..." autocomplete="off" />
+            </div>
+        </div>
+
+        <div class="taskbar-add-card">
+            <button class="add-btn" aria-label="Add Post" onclick="location.href='@Url.Page("/Submit")'">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#800000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="16" />
+                    <line x1="8" y1="12" x2="16" y2="12" />
+                </svg>
+                <span class="label">Add</span>
+            </button>
+        </div>
+    </div>
+
+
+    <script>
+        function toggleDetails(card) {
+            card.classList.toggle('show-details');
+        }
+
+        // --- Search Bar Functionality ---
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const itemCards = document.querySelectorAll('.item-card');
+            const noLostItemsMessage = document.querySelector('.items-section:first-of-type .no-items');
+            const noFoundItemsMessage = document.querySelector('.items-section:last-of-type .no-items');
+
+            function filterItems() {
+                const searchQuery = searchInput.value.toLowerCase().trim();
+
+                itemCards.forEach(card => {
+                    const itemDetails = card.querySelector('.item-details');
+                    if (itemDetails) {
+                        const itemText = itemDetails.innerText.toLowerCase(); // Get all visible text in details
+                        if (itemText.includes(searchQuery)) {
+                            card.classList.remove('filtered-out');
+                        } else {
+                            card.classList.add('filtered-out');
+                        }
+                    }
+                });
+
+                // Show/hide "No items" messages based on search results
+                if (noLostItemsMessage) {
+                    const lostItemsGrid = document.querySelector('.items-section:first-of-type .items-grid');
+                    const visibleLostItems = lostItemsGrid ? lostItemsGrid.querySelectorAll('.item-card:not(.filtered-out)').length : 0;
+                    if (visibleLostItems === 0 && searchQuery !== '') { // If search is active and no items found in lost section
+                        noLostItemsMessage.style.display = 'block';
+                        noLostItemsMessage.textContent = 'No matching lost fashion accessories found.';
+                    } else if (@(Model.LostItems?.Any() == true ? "true" : "false")) { // Revert to original message if not searching
+                        noLostItemsMessage.style.display = 'none'; // Hide if there are items and no search
+                    } else { // No items originally, and no search
+                         noLostItemsMessage.style.display = 'block';
+                         noLostItemsMessage.textContent = 'No lost fashion accessories have been posted yet.';
+                    }
+                }
+
+                if (noFoundItemsMessage) {
+                     const foundItemsGrid = document.querySelector('.items-section:last-of-type .items-grid');
+                     const visibleFoundItems = foundItemsGrid ? foundItemsGrid.querySelectorAll('.item-card:not(.filtered-out)').length : 0;
+                    if (visibleFoundItems === 0 && searchQuery !== '') { // If search is active and no items found in found section
+                        noFoundItemsMessage.style.display = 'block';
+                        noFoundItemsMessage.textContent = 'No matching found fashion accessories reported.';
+                    } else if (@(Model.FoundItems?.Any() == true ? "true" : "false")) { // Revert to original message if not searching
+                        noFoundItemsMessage.style.display = 'none'; // Hide if there are items and no search
+                    } else { // No items originally, and no search
+                         noFoundItemsMessage.style.display = 'block';
+                         noFoundItemsMessage.textContent = 'No found fashion accessories have been reported yet.';
+                    }
+                }
+            }
+
+            searchInput.addEventListener('input', filterItems);
+
+            // Initial filter call in case the search input already has text (e.g., after a browser refresh)
+            filterItems();
+        });
+    </script>
+    <script src="~/js/taskbar.js" asp-append-version="true"></script>
+</body>
+</html>

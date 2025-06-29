@@ -1,0 +1,1503 @@
+﻿/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f9;
+    color: #333;
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: #800000;
+    color: white;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFD700;
+    transition: color 0.3s ease;
+}
+
+    .logo:hover {
+        color: #FFFFFF;
+    }
+
+/* Search Bar */
+.search-bar-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar {
+    width: 60%;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-button.about-us {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    margin-right: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    .nav-button.about-us:hover {
+        color: #FFD700;
+    }
+
+.profile-icon-container {
+    display: inline-flex;
+    align-items: center;
+}
+
+.profile-icon {
+    width: 27px;
+    height: 27px;
+}
+
+.nav-button.profile-icon:hover {
+    color: #FFD700;
+}
+
+.back-button {
+    background-color: white;
+    color: #800000;
+    padding: 10px;
+    border-radius: 50%;
+    border: 2px solid #800000;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, color 0.3s;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 80px;
+    left: 25px;
+    margin: 0;
+}
+
+.back-icon {
+    font-size: 18px;
+}
+
+.back-button:hover {
+    background-color: #800000;
+    color: white;
+    border: 2px solid white;
+}
+
+.profile-icon {
+    width: 24px;
+    height: 24px;
+    background: url('./assets3/profile_icon.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.home-icon {
+    width: 24px;
+    height: 24px;
+    background: url('./assets3/home-icon.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+    .profile-icon:hover,
+    .home-icon:hover {
+        transform: scale(1.1);
+    }
+
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 10px;
+    padding-bottom: 120px;
+}
+
+/* Most Recent Section */
+.most-recent, .categories {
+    background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-radius: 36px;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 0 0 2px rgba(255,255,255,0.10) inset;
+    transition: box-shadow 0.3s, transform 0.3s, background-image 0.3s;
+    position: relative;
+    overflow: hidden;
+    padding: 32px 32px 40px 32px;
+    margin-bottom: 20px;
+    min-height: 320px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+    .most-recent h2, .categories h2 {
+        font-size: 25px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #800000;
+    }
+
+.recent-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 180px;
+    height: 100%;
+}
+
+.no-items {
+    color: #666;
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Categories Section */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    text-align: center;
+}
+
+.category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border-radius: 24px;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    box-shadow: 0 4px 24px 0 rgba(31,38,135,0.10), 0 0 0 2px rgba(255,255,255,0.18) inset;
+    transition: box-shadow 0.3s, transform 0.3s, background-image 0.3s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+    .category-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+.categories .icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 10px auto;
+    box-shadow: 0 2px 12px 0 rgba(128,0,0,0.10);
+    border-radius: 18px;
+    background: rgba(255,255,255,0.18);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.category-item p {
+    margin-top: 2px;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+/* Floating Add Button */
+.floating-add-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #800000;
+    color: white;
+    font-size: 24px;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    line-height: 60px;
+}
+
+    .floating-add-button:hover {
+        background: #660000;
+        transform: scale(1.1);
+    }
+
+/* Profile Section */
+.profile-section {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Profile Picture */
+.profile-picture-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.upload-label {
+    position: absolute;
+    bottom: -15px;
+    background: #800000;
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#profile-upload {
+    display: none;
+}
+
+/* Profile Form Input Styling */
+.profile-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left; /* Ensure labels are left-aligned */
+}
+
+    .profile-form label {
+        font-weight: bold;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .profile-form input[type="text"],
+    .profile-form input[type="email"] {
+        width: 100%;
+        padding: 12px 44px 12px 16px;
+        border-radius: 12px;
+        border: 1.5px solid rgba(255,255,255,0.35);
+        background: rgba(255,255,255,0.45);
+        font-size: 1rem;
+        outline: none;
+        color: #111;
+        margin-bottom: 0;
+        box-sizing: border-box;
+        box-shadow: 0 2px 12px 0 rgba(31,38,135,0.08);
+        transition: box-shadow 0.2s, border 0.2s;
+    }
+
+        .profile-form input[type="text"]:focus,
+        .profile-form input[type="email"]:focus {
+            border: 1.5px solid #a3c9ff;
+            box-shadow: 0 4px 24px 0 rgba(31,38,135,0.16);
+            outline: none;
+        }
+
+.save-button, .log-out-button {
+    width: 60%;
+    display: block;
+    margin: 16px auto 0 auto;
+    padding: 12px 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(128,0,0,0.85) 0%, rgba(200,220,255,0.18) 100%);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: box-shadow 0.2s, border 0.2s, background 0.2s, color 0.2s;
+    box-shadow: 0 2px 12px 0 rgba(31,38,135,0.10);
+    outline: none;
+    will-change: transform, box-shadow;
+    backdrop-filter: blur(8px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+}
+
+    .save-button:hover, .save-button:focus, .log-out-button:hover, .log-out-button:focus {
+        background: linear-gradient(135deg, #FFD700 0%, #ffe066 100%);
+        border: 2px solid #FFD700;
+        color: #800000;
+        box-shadow: 0 0 16px 4px #ffe066, 0 6px 24px 0 rgba(128,0,0,0.18);
+        filter: brightness(1.08) drop-shadow(0 0 8px #fff7b2);
+    }
+
+/* Submit Item Section */
+.submit-item-section {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+    .submit-item-section h1 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #800000;
+        margin-bottom: 20px;
+    }
+
+
+/* Image Upload */
+.image-upload {
+    position: relative;
+    width: 175px;
+    height: 175px;
+    border-radius: 0%;
+    background: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto 20px;
+    cursor: pointer;
+}
+
+    .image-upload .upload-label {
+        position: absolute;
+        bottom: -15px;
+        background: #800000;
+        color: white;
+        padding: 5px 10px;
+        font-size: 12px;
+        border-radius: 12px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+#item-image {
+    display: none;
+}
+
+/* Form Styling */
+.submit-item-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
+
+    .submit-item-form label {
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .submit-item-form input,
+    .submit-item-form select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 18px;
+        border: 1.5px solid rgba(255,255,255,0.35);
+        background: linear-gradient(135deg, rgba(255,255,255,0.38) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        font-size: 15px;
+        color: #800000;
+        box-shadow: 0 2px 12px 0 rgba(128,0,0,0.08), 0 0 0 2px rgba(255,255,255,0.10) inset;
+        transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+        box-sizing: border-box;
+    }
+
+        .submit-item-form input:focus,
+        .submit-item-form select:focus {
+            border: 1.5px solid #FFD700;
+            box-shadow: 0 4px 24px 0 #FFD70033;
+            outline: none;
+            background: linear-gradient(135deg, #fff7b2 0%, #ffe066 100%);
+            color: #800000;
+        }
+
+    .submit-item-form .date-input,
+    .submit-item-form #found-time-section > div {
+        display: flex;
+        gap: 10px;
+    }
+
+        .submit-item-form .date-input select,
+        .submit-item-form #found-time-section select {
+            flex: 1 1 0;
+            min-width: 0;
+            width: 100%;
+        }
+
+/* About Us Section */
+.about-us-section {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    line-height: 1.8;
+}
+
+    .about-us-section h1 {
+        font-size: 80px;
+        font-weight: bold;
+        color: #800000;
+        margin-bottom: 20px;
+    }
+
+    .about-us-section p {
+        font-size: 18px;
+        color: #333;
+        text-align: justify;
+    }
+
+/* Background Image for About Us */
+body {
+    background: url('./assets3/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.logo {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+.welcome-message {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+    .welcome-message h1 {
+        font-size: 45px;
+        font-weight: bold;
+        color: #800000;
+        margin-top: 150px;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .welcome-message p {
+        font-size: 18px;
+        color: white;
+    }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    max-width: auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.login-panel h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.login-subtext {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+}
+
+    .remember-me label {
+        margin-left: 5px;
+        font-size: 14px;
+        color: #333;
+    }
+
+.forgot-password {
+    font-size: 14px;
+    color: #800000;
+    text-decoration: none;
+}
+
+    .forgot-password:hover {
+        color: #660000;
+    }
+
+.admin-link {
+    font-size: 14px;
+    color: #800000;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+
+    .admin-link:hover {
+        color: #660000;
+    }
+
+.login-panel input[type="text"],
+.login-panel input[type="password"] {
+    width: 100%;
+    max-width: 422px;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+    .login-panel input[type="text"]:focus,
+    .login-panel input[type="password"]:focus {
+        outline: none;
+        border-color: #800000;
+        box-shadow: 0 0 8px rgba(128, 0, 0, 0.4);
+    }
+
+.login-panel button {
+    width: 100%;
+    padding: 12px;
+    background: #800000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+    .login-panel button:hover {
+        background: #660000;
+    }
+
+/* Radio buttons*/
+.radio-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+    /* Custom styles for the radio buttons */
+    .radio-item input[type="radio"] {
+        appearance: none;
+        width: 12px;
+        height: 12px;
+        border: 2px solid #800000;
+        border-radius: 50%;
+        background-color: transparent;
+    }
+
+        .radio-item input[type="radio"]:checked {
+            background-color: #800000; /* Red fill when checked */
+        }
+
+            .radio-item input[type="radio"]:checked::after {
+                content: ''; /* White dot for checked state */
+                position: absolute;
+                width: 6px;
+                height: 6px;
+                background-color: white;
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+    /* Label styling */
+    .radio-item label {
+        font-size: 14px;
+        color: #800000;
+        cursor: pointer;
+    }
+
+.get-started {
+    background: #800000;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 16px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 20px;
+    width: 200px;
+}
+
+    .get-started:hover {
+        background: #660000;
+    }
+
+/* Popup container */
+.popup {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Overlay background */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Popup container */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Popup content */
+.popup-content {
+    background: linear-gradient(135deg, rgba(255,255,255,0.32) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border-radius: 24px;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 0 0 2px rgba(255,255,255,0.10) inset;
+    padding: 32px 32px 24px 32px;
+    text-align: center;
+    max-width: 400px;
+    margin: auto;
+    font-size: 16px;
+    color: #222;
+    transition: box-shadow 0.3s, background 0.3s;
+}
+
+    /* Popup heading (h3) */
+    .popup-content h3 {
+        font-size: 20px;
+    }
+
+/* Popup button */
+.popup button {
+    background-color: #800000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+    /* Button hover effect */
+    .popup button:hover {
+        background-color: #FFD700;
+        color: #800000;
+    }
+
+/* Categories Buttons Page */
+.category-page {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.category-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #800000;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #800000;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+    .back-button:hover {
+        color: #FFD700;
+    }
+
+.items-section {
+    margin-top: 20px;
+}
+
+    .items-section h2 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #800000;
+        margin-bottom: 15px;
+        text-align: left;
+        padding-left: 20px;
+    }
+
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.38) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-radius: 28px;
+    box-shadow: 0 4px 24px rgba(128,0,0,0.10), 0 0 0 2px rgba(255,255,255,0.10) inset;
+}
+
+.no-items {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+    grid-column: span 4;
+}
+
+/* Liquid Glass Bottom Task Bar Tweaks */
+.bottom-taskbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 32px;
+    padding: 0 0 32px 0;
+    pointer-events: none;
+    background: none;
+}
+
+    .bottom-taskbar > * {
+        pointer-events: auto;
+    }
+
+.taskbar-group-card, .taskbar-search-card, .taskbar-add-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(255,255,255,0.38) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+    box-shadow: 0 8px 40px 0 rgba(128,0,0,0.18), 0 0 0 2px rgba(255,255,255,0.18) inset;
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    border-radius: 40px;
+    border: 2px solid rgba(255,255,255,0.35);
+    min-width: 0;
+    min-height: 72px;
+    padding: 0 18px;
+    transition: box-shadow 0.3s, background 0.3s, min-width 0.3s, min-height 0.3s, padding 0.3s, transform 0.4s cubic-bezier(.25,1.25,.5,1);
+    position: relative;
+    box-sizing: border-box;
+}
+
+.taskbar-group-card {
+    gap: 18px;
+}
+
+.taskbar-pill {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 48px;
+    border-radius: 32px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: relative;
+    user-select: none;
+    padding: 0 18px;
+    gap: 10px;
+    transition: all 0.32s cubic-bezier(.25,1.25,.5,1), box-shadow 0.2s, background 0.2s;
+}
+
+    .taskbar-pill .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.18);
+        box-shadow: 0 2px 12px 0 rgba(128,0,0,0.10);
+        margin-bottom: 0;
+        transition: margin 0.3s, box-shadow 0.3s;
+    }
+
+    .taskbar-pill .label {
+        font-size: 1.12rem;
+        font-weight: 600;
+        color: #800000;
+        letter-spacing: 0.01em;
+        margin-left: 8px;
+        opacity: 1;
+        text-align: center;
+        transition: color 0.2s, transform 0.3s, opacity 0.2s;
+    }
+
+    .taskbar-pill.active, .taskbar-pill:focus {
+        background: linear-gradient(135deg, rgba(255,255,255,0.32) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        box-shadow: 0 2px 12px 0 rgba(31,38,135,0.10), 0 1.5px 8px 0 rgba(31,38,135,0.08);
+        border: 1.5px solid rgba(255,255,255,0.35);
+        color: #800000;
+        transform: none;
+    }
+
+        .taskbar-pill.active .label, .taskbar-pill:focus .label {
+            color: #800000;
+        }
+
+    .taskbar-pill:active {
+        transform: scale(0.97);
+    }
+
+.taskbar-search-card, .taskbar-add-card {
+    min-width: 72px;
+    min-height: 72px;
+    padding: 0 10px;
+    border-radius: 40px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background: linear-gradient(135deg, #800000 0%, #a83232 100%);
+    box-shadow: 0 0 24px 4px #80000055, 0 4px 32px 0 #80000022;
+    border: none;
+    transition: box-shadow 0.2s, background 0.2s, transform 0.2s;
+    will-change: transform, box-shadow;
+}
+
+    .taskbar-search-card:hover, .taskbar-search-card:focus-within,
+    .taskbar-add-card:hover, .taskbar-add-card:focus-within {
+        background: linear-gradient(135deg, rgba(255,255,255,0.32) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        box-shadow: 0 2px 12px 0 rgba(31,38,135,0.10), 0 1.5px 8px 0 rgba(31,38,135,0.08);
+        border: 1.5px solid rgba(255,255,255,0.35);
+        color: #800000;
+        transform: none;
+    }
+
+.add-btn, .search-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .add-btn svg, .search-btn svg {
+        stroke: #fff;
+    }
+
+    .add-btn .label, .search-btn .label {
+        display: none;
+    }
+
+    .add-btn:focus, .add-btn:hover, .taskbar-search-card:focus-within, .taskbar-search-card:hover {
+        background: linear-gradient(135deg, #a83232 0%, #800000 100%);
+        box-shadow: 0 0 32px 8px #80000088, 0 8px 32px 0 #80000044;
+    }
+
+.taskbar-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.search-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.32);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    box-shadow: 0 2px 12px 0 rgba(128,0,0,0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: box-shadow 0.2s, background 0.2s;
+    outline: none;
+    padding: 0;
+}
+
+    .search-btn:focus, .search-btn:hover {
+        background: linear-gradient(135deg, #ffe066 0%, #fff7b2 100%);
+        box-shadow: 0 0 16px 4px #ffe066, 0 6px 24px 0 #80000022;
+    }
+
+.search-input {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    height: 100%;
+    opacity: 0;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    padding: 0 0;
+    font-size: 1.12rem;
+    background: linear-gradient(135deg, rgba(255,255,255,0.38) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+    color: #222;
+    box-shadow: 0 2px 12px 0 rgba(128,0,0,0.10);
+    transition: width 0.4s cubic-bezier(.25,1.25,.5,1), opacity 0.22s, padding 0.3s;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.taskbar-search.expanded .search-input {
+    width: 320px;
+    opacity: 1;
+    padding: 0 24px;
+    pointer-events: auto;
+}
+/* Expansion Animation */
+.bottom-taskbar.search-expanded .taskbar-group-card {
+    transform: translateX(-180px) scale(0.96);
+    opacity: 0.7;
+}
+
+.bottom-taskbar.search-expanded .taskbar-add-card {
+    transform: translateX(180px) scale(0.96);
+    opacity: 0.7;
+}
+
+.bottom-taskbar.search-expanded .taskbar-search-card {
+    z-index: 10;
+    min-width: 340px;
+    min-height: 72px;
+    padding: 0 0;
+    box-shadow: 0 8px 48px 0 #80000033, 0 0 0 2px #fff7b2 inset;
+}
+
+.bottom-taskbar.search-expanded .taskbar-search .search-btn {
+    display: none;
+}
+
+.bottom-taskbar.search-expanded .taskbar-search .search-input {
+    position: relative;
+    left: unset;
+    top: unset;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    padding: 0 24px 0 48px;
+    pointer-events: auto;
+    background: transparent;
+    color: #800000;
+    font-size: 1.12rem;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    z-index: 2;
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .bottom-taskbar {
+        gap: 12px;
+        padding-bottom: 10px;
+    }
+
+    .taskbar-group-card, .taskbar-search-card, .taskbar-add-card {
+        min-height: 56px;
+        border-radius: 28px;
+        padding: 0 8px;
+    }
+
+    .taskbar-pill {
+        min-height: 44px;
+        padding: 0 8px;
+    }
+
+    .taskbar-search-card, .taskbar-add-card {
+        min-width: 56px;
+        min-height: 56px;
+        border-radius: 28px;
+        padding: 0 8px;
+    }
+
+    .taskbar-search.expanded .search-input,
+    .bottom-taskbar.search-expanded .taskbar-search .search-input {
+        width: 100%;
+        min-width: 0;
+        font-size: 1rem;
+        padding: 0 12px;
+    }
+
+    .bottom-taskbar.search-expanded .taskbar-group-card {
+        transform: translateX(-80px) scale(0.96);
+    }
+
+    .bottom-taskbar.search-expanded .taskbar-add-card {
+        transform: translateX(80px) scale(0.96);
+    }
+
+    .bottom-taskbar.search-expanded .taskbar-search-card {
+        min-width: 100vw;
+        min-height: 56px;
+    }
+}
+
+/* 3. Subtle tilt and glow on card group hover */
+.taskbar-group-card {
+    transition: box-shadow 0.3s, background 0.3s, min-width 0.3s, min-height 0.3s, padding 0.3s, transform 0.4s cubic-bezier(.25,1.25,.5,1);
+    will-change: transform, box-shadow, background-image;
+}
+
+    .taskbar-group-card.tilted {
+        box-shadow: 0 6px 24px 0 #FFD70022;
+        border: none;
+        transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(1.01) translateY(-1px);
+    }
+
+/* 4. Active pill expands on hover */
+.taskbar-pill:not(.active):hover, .taskbar-pill:not(.active):focus {
+    background: linear-gradient(135deg, rgba(255,255,255,0.32) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    box-shadow: 0 2px 12px 0 rgba(31,38,135,0.10), 0 1.5px 8px 0 rgba(31,38,135,0.08);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: #800000;
+    transform: none;
+}
+
+    .taskbar-pill:not(.active):hover .label, .taskbar-pill:not(.active):focus .label {
+        color: #800000;
+    }
+
+/* 2. Remove icon circle for three options */
+.taskbar-group-card .taskbar-pill .icon {
+    background: none;
+    box-shadow: none;
+    width: 32px;
+    height: 32px;
+}
+
+/* Add button: less glow, subtle tilt on hover, longer pill */
+.taskbar-add-card {
+    min-width: 120px;
+    min-height: 72px;
+    padding: 0 32px;
+    border-radius: 36px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background: linear-gradient(135deg, #800000 0%, #a83232 100%);
+    box-shadow: 0 0 16px 2px #80000044, 0 4px 24px 0 #80000022;
+    border: none;
+    transition: box-shadow 0.2s, background 0.2s, transform 0.2s;
+    will-change: transform, box-shadow;
+}
+
+    .taskbar-add-card.tilted {
+        box-shadow: 0 8px 32px 0 #80000033;
+        transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(1.018) translateY(-2px);
+    }
+
+    .taskbar-add-card:hover, .taskbar-add-card:focus-within {
+        background: linear-gradient(135deg, #a83232 0%, #800000 100%);
+        box-shadow: 0 0 20px 4px #80000066, 0 8px 24px 0 #80000033;
+    }
+
+    /* Remove icon circle for add button */
+    .taskbar-add-card .add-btn svg {
+        background: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+
+/* 1. Search button: yellow card, icon only, no pill/label, glow matches add button */
+.taskbar-search-card {
+    min-width: 72px;
+    min-height: 72px;
+    padding: 0 18px;
+    border-radius: 36px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background: linear-gradient(135deg, #FFD700 0%, #ffe066 100%);
+    box-shadow: 0 0 16px 2px #FFD70044, 0 4px 24px 0 #FFD70022;
+    border: none;
+    transition: box-shadow 0.2s, background 0.2s, transform 0.2s;
+    will-change: transform, box-shadow;
+}
+
+    .taskbar-search-card .search-btn {
+        background: none;
+        border: none;
+        box-shadow: none;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+    }
+
+        .taskbar-search-card .search-btn svg {
+            stroke: #800000;
+            background: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+        }
+
+    .taskbar-search-card:hover, .taskbar-search-card:focus-within {
+        background: linear-gradient(135deg, #ffe066 0%, #FFD700 100%);
+        box-shadow: 0 0 20px 4px #FFD70066, 0 8px 24px 0 #FFD70033;
+    }
+
+/* 2. Reduce distance between cards when search is expanded */
+.bottom-taskbar.search-expanded {
+    gap: 12px !important;
+}
+
+    .bottom-taskbar.search-expanded .taskbar-group-card {
+        transform: translateX(-60px) scale(0.98);
+        opacity: 0.7;
+    }
+
+    .bottom-taskbar.search-expanded .taskbar-add-card {
+        transform: translateX(60px) scale(0.98);
+        opacity: 0.7;
+    }
+
+    /* 3. Expanded search bar: white, shadow, icon+word inside */
+    .bottom-taskbar.search-expanded .taskbar-search-card {
+        z-index: 10;
+        min-width: 320px;
+        min-height: 72px;
+        padding: 0 0;
+        background: #fff;
+        box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bottom-taskbar.search-expanded .taskbar-search {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+    }
+
+    .bottom-taskbar.search-expanded .search-input {
+        width: 100%;
+        opacity: 1;
+        padding: 0 24px 0 48px;
+        pointer-events: auto;
+        background: transparent;
+        color: #800000;
+        font-size: 1.12rem;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .bottom-taskbar.search-expanded .search-icon-label {
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 2;
+        color: #800000;
+        font-weight: 600;
+        font-size: 1.12rem;
+        pointer-events: none;
+    }
+
+        .bottom-taskbar.search-expanded .search-icon-label svg {
+            width: 28px;
+            height: 28px;
+            stroke: #800000;
+        }
+
+.dashboard-bg {
+  min-height: 100vh;
+  background: url('/Assets/login_background.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* 3. Tilt and spotlight effect for cards */
+.most-recent.tilted, .categories.tilted {
+    box-shadow: 0 16px 48px 0 rgba(128,0,0,0.18), 0 0 0 4px rgba(255,255,255,0.12);
+    transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(1.018) translateY(-2px);
+    background-image: radial-gradient( 400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), rgba(255,255,255,0.08) 60%, rgba(255,255,255,0.00) 100% ), linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+}
+
+.category-item.tilted {
+    box-shadow: 0 12px 36px 0 rgba(128,0,0,0.16), 0 0 0 4px rgba(255,255,255,0.12);
+    transform: perspective(700px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(1.012) translateY(-1px);
+    background-image: radial-gradient( 200px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.22), rgba(255,255,255,0.08) 60%, rgba(255,255,255,0.00) 100% ), linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+}
+
+.section-pill {
+    display: inline-block;
+    padding: 6px 22px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.32) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    box-shadow: 0 2px 12px 0 rgba(31,38,135,0.10), 0 0 0 2px rgba(255,255,255,0.10) inset;
+    font-size: 1.08em;
+    font-weight: 600;
+    color: #800000;
+    transition: box-shadow 0.2s, background 0.2s;
+}
+
+.about-back-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 32px 0 0 32px;
+}
+
+.back-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 22px 8px 18px;
+    border-radius: 32px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.32) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    box-shadow: 0 2px 12px 0 rgba(31,38,135,0.10), 0 0 0 2px rgba(255,255,255,0.10) inset;
+    font-size: 1.08em;
+    font-weight: 600;
+    color: #800000;
+    cursor: pointer;
+    transition: box-shadow 0.2s, background 0.2s, transform 0.2s;
+    outline: none;
+    border: none;
+}
+
+    .back-pill:hover, .back-pill:focus {
+        box-shadow: 0 4px 24px 0 #FFD70033, 0 0 0 4px #fff7b2;
+        background: linear-gradient(135deg, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0.22) 100%);
+        transform: scale(1.04);
+    }
+
+.back-arrow {
+    font-size: 1.2em;
+    margin-right: 2px;
+}
+
+.back-text {
+    font-size: 1.08em;
+    font-weight: 600;
+}
+
+.about-glass-card {
+    max-width: 900px;
+    min-height: 420px;
+    margin: 60px auto 0 auto;
+    padding: 64px 56px 72px 56px;
+    border-radius: 44px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 0 0 2px rgba(255,255,255,0.10) inset;
+    transition: box-shadow 0.3s, transform 0.3s, background-image 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+    .about-glass-card h1 {
+        font-size: 2.6em;
+        margin-bottom: 32px;
+        text-align: center;
+    }
+
+    .about-glass-card .section-pill {
+        font-size: 1.5em;
+        padding: 14px 64px;
+        border-radius: 999px;
+        display: inline-block;
+    }
+
+    .about-glass-card p:first-of-type {
+        margin-top: 72px;
+    }
+
+.profile-glass-card {
+    max-width: 900px;
+    min-height: 420px;
+    margin: 60px auto 0 auto;
+    padding: 64px 56px 72px 56px;
+    border-radius: 44px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 0 0 2px rgba(255,255,255,0.10) inset;
+    transition: box-shadow 0.3s, transform 0.3s, background-image 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+    .profile-glass-card h1 {
+        font-size: 2.6em;
+        margin-bottom: 32px;
+        text-align: center;
+    }
+
+    .profile-glass-card .section-pill {
+        font-size: 1.5em;
+        padding: 14px 64px;
+        border-radius: 999px;
+        display: inline-block;
+    }
+
+    .profile-glass-card .profile-card {
+        margin-top: 72px;
+    }
+
+    .profile-glass-card.tilted {
+        box-shadow: 0 16px 48px 0 rgba(128,0,0,0.18), 0 0 0 4px rgba(255,255,255,0.12);
+        transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(1.018) translateY(-2px);
+        background-image: radial-gradient( 400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), rgba(255,255,255,0.08) 60%, rgba(255,255,255,0.00) 100% ), linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+    }
+
+.category-glass-card {
+    max-width: 900px;
+    min-height: 420px;
+    margin: 60px auto 0 auto;
+    padding: 64px 56px 72px 56px;
+    border-radius: 44px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    box-shadow: 0 8px 32px 0 rgba(128,0,0,0.18), 0 0 0 2px rgba(255,255,255,0.10) inset;
+    transition: box-shadow 0.3s, transform 0.3s, background-image 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+    .category-glass-card.tilted {
+        box-shadow: 0 16px 48px 0 rgba(128,0,0,0.18), 0 0 0 4px rgba(255,255,255,0.12);
+        transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(1.018) translateY(-2px);
+        background-image: radial-gradient( 400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), rgba(255,255,255,0.08) 60%, rgba(255,255,255,0.00) 100% ), linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+    }
+
+    /* Hide Home pill by default in category panels, show on hover */
+    .category-glass-card ~ .bottom-taskbar .home-pill {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.22s;
+    }
+
+    .category-glass-card ~ .bottom-taskbar .taskbar-group-card:hover .home-pill {
+        opacity: 1;
+        pointer-events: auto;
+    }

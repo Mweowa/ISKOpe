@@ -1,0 +1,308 @@
+﻿@page
+@model ISKOpe.Pages.LoginModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Login - ISKOpe</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+    <style>
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body.login-bg {
+            min-height: 100vh;
+            background: url('@Url.Content("~/Assets/login_background.png")') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .glass-login-container {
+            display: flex;
+            width: 1000px;
+            max-width: 98vw;
+            min-height: 600px;
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.18), 0 0 0 2px rgba(255,255,255,0.10) inset;
+            background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,220,255,0.18) 100%), radial-gradient(ellipse at top left, rgba(255,255,255,0.18) 60%, transparent 100%);
+            backdrop-filter: blur(32px) saturate(180%);
+            -webkit-backdrop-filter: blur(32px) saturate(180%);
+            border: 1.5px solid rgba(255,255,255,0.35);
+            transition: box-shadow 0.3s, transform 0.3s;
+            padding: 0;
+            align-items: stretch;
+            position: relative;
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+            --tilt-x: 0deg;
+            --tilt-y: 0deg;
+            background-image: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), rgba(255,255,255,0.08) 60%, rgba(255,255,255,0.00) 100%);
+            will-change: transform, box-shadow, background-image;
+        }
+
+            .glass-login-container:hover {
+                box-shadow: 0 12px 40px rgba(128,0,0,0.25);
+                transform: scale(1.018) translateY(-2px);
+            }
+
+            .glass-login-container.tilted {
+                transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(1.018) translateY(-2px);
+            }
+
+            .glass-login-container:before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                border-radius: 36px;
+                pointer-events: none;
+                box-shadow: 0 0 40px 8px rgba(128,0,128,0.08) inset, 0 0 0 2px rgba(255,255,255,0.18) inset;
+            }
+
+        .glass-login-form {
+            flex: 1 1 0;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: transparent;
+        }
+
+            .glass-login-form .logo {
+                font-size: 2.2rem;
+                color: #800000;
+                font-weight: 700;
+                margin-bottom: 8px;
+            }
+
+            .glass-login-form .welcome-message {
+                margin-bottom: 32px;
+            }
+
+                .glass-login-form .welcome-message h1,
+                .glass-login-form .welcome-message p {
+                    color: #800000;
+                }
+
+                .glass-login-form .welcome-message h1 {
+                    font-size: 2rem;
+                    font-weight: 600;
+                    margin: 0 0 6px 0;
+                    text-align: center;
+                }
+
+                .glass-login-form .welcome-message p {
+                    font-size: 1rem;
+                    margin: 0;
+                }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 44px 12px 16px;
+            border-radius: 12px;
+            border: 1.5px solid rgba(255,255,255,0.35);
+            background: rgba(255,255,255,0.45);
+            font-size: 1rem;
+            color: #111;
+            box-shadow: 0 2px 12px rgba(31,38,135,0.08);
+            transition: box-shadow 0.2s, border 0.2s;
+        }
+
+            input[type="text"]:focus,
+            input[type="password"]:focus {
+                border: 1.5px solid #a3c9ff;
+                box-shadow: 0 4px 24px rgba(31,38,135,0.16);
+                outline: none;
+            }
+
+        .input-group {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: #111;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .form-options label,
+            .form-options a {
+                font-size: 0.95rem;
+                color: #444;
+                text-decoration: none;
+            }
+
+                .form-options a:hover {
+                    text-decoration: underline;
+                }
+
+        button[type="submit"] {
+            width: 60%;
+            margin: 16px auto 0 auto;
+            padding: 12px 0;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(128,0,0,0.85), rgba(200,220,255,0.18));
+            border: 1.5px solid rgba(255,255,255,0.35);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 12px rgba(31,38,135,0.10);
+        }
+
+            button[type="submit"]:hover {
+                background: linear-gradient(135deg, #FFD700, #ffe066);
+                color: #800000;
+                border: 1.5px solid #FFD700;
+                box-shadow: 0 0 16px 4px #ffe066, 0 6px 24px rgba(128,0,0,0.18);
+            }
+
+        .switch-login {
+            margin-top: 18px;
+            text-align: center;
+        }
+
+            .switch-login a {
+                color: #800000;
+                font-weight: bold;
+                text-decoration: underline;
+            }
+
+                .switch-login a:hover {
+                    color: #a83232;
+                }
+
+        .glass-login-image {
+            flex: 0 0 400px;
+            display: flex;
+            align-items: stretch;
+            justify-content: flex-end;
+        }
+
+        .login-photo-img {
+            width: 100%;
+            height: 592px;
+            object-fit: cover;
+            border-radius: 30px;
+            margin: 8px;
+            box-shadow: 0 4px 24px rgba(31,38,135,0.10), 0 0 0 2px rgba(255,255,255,0.18) inset;
+        }
+
+        @@media (max-width: 900px) {
+            .glass-login-container {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .glass-login-image {
+                display: none;
+            }
+        }
+  
+    </style>
+
+</head>
+<body class="login-bg">
+    <div class="glass-login-container">
+        <div class="glass-login-form">
+            <div class="welcome-message">
+                <h1>Welcome to ISKOpe</h1>
+                <p>A lost and found system tailored for the entire PUP community.</p>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <p style="color:red; text-align:center">@Model.ErrorMessage</p>
+            }
+
+            <form method="post">
+                <div class="input-group">
+                    <input asp-for="Input.StudentNumber" type="text" placeholder="Student Number" required />
+                </div>
+                <div class="input-group">
+                    <input asp-for="Input.Password" type="password" placeholder="Password" required />
+                    <button type="button" class="toggle-password" onclick="togglePassword('Password', this)">👁</button>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+
+            <div class="switch-login">
+                <a asp-page="/login-admin">Login as admin</a>
+            </div>
+        </div>
+        <div class="glass-login-image">
+            <img src="~/Assets/login_photo.png" alt="Login visual" class="login-photo-img" />
+        </div>
+    </div>
+
+    <script src="~/js/taskbar.js" asp-append-version="true"></script>
+
+    <script>
+        function togglePassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+            input.type = input.type === 'password' ? 'text' : 'password';
+            btn.innerHTML = input.type === 'text' ? '&#128064;' : '&#128065;';
+        }
+
+        const card = document.querySelector('.glass-login-container');
+        if (card) {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const px = x / rect.width;
+                const py = y / rect.height;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+                card.style.setProperty('--tilt-x', `${(py - 0.5) * 3}deg`);
+                card.style.setProperty('--tilt-y', `${(px - 0.5) * -5}deg`);
+                card.classList.add('tilted');
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.setProperty('--mouse-x', '50%');
+                card.style.setProperty('--mouse-y', '50%');
+                card.style.setProperty('--tilt-x', '0deg');
+                card.style.setProperty('--tilt-y', '0deg');
+                card.classList.remove('tilted');
+            });
+        }
+    </script>
+</body>
+</html>

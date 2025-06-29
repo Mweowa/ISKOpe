@@ -1,0 +1,62 @@
+﻿@page
+@{
+    Layout = null; // Or Layout = "_Layout"; if you have one
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - ISKOpe</title>
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+<body class="dashboard-bg">
+    <main>
+        <section class="about-glass-card">
+            <h1><span class="section-pill">About Us</span></h1>
+            <p>
+                Welcome to ISKOpe, a lost and found platform designed exclusively for the students of Polytechnic University of the Philippines - Manila...
+            </p>
+            <p>
+                ISKOpe is created to be an accessible and user-friendly system to help PUPians report, search, and recover lost items...
+            </p>
+        </section>
+    </main>
+
+    <div class="bottom-taskbar">
+        <div class="taskbar-group-card">
+            <div class="taskbar-pill home-pill">
+                <span class="icon home-icon">
+                    <img src="~/Assets/Home.png" alt="Home" width="32" height="32" />
+                </span>
+                <span class="label">Home</span>
+            </div>
+            <div class="taskbar-pill about-pill active">
+                <span class="icon about-icon">
+                    <img src="~/Assets/About Us.png" alt="About Us" width="32" height="32" />
+                </span>
+                <span class="label">About Us</span>
+            </div>
+            <div class="taskbar-pill profile-pill">
+                <span class="icon profile-icon">
+                    <img src="~/Assets/Profile.png" alt="Profile" width="32" height="32" />
+                </span>
+                <span class="label">Profile</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/taskbar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('.home-pill')?.addEventListener('click', function () {
+                window.location.href = '/Index';
+            });
+            document.querySelector('.profile-pill')?.addEventListener('click', function () {
+                window.location.href = '/Profile';
+            });
+        });
+    </script>
+</body>
+</html>

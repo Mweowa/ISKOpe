@@ -1,0 +1,276 @@
+﻿@page
+@model ISKOpe.Pages.SubmitModel
+@{
+    Layout = null; // Keep this as you explicitly don't want a layout file
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submit an Item - ISKOpe</title>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <style>
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 12px 16px;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            opacity: 1; /* Start fully visible */
+            transition: opacity 1s ease-out; /* Smooth transition for fading */
+        }
+
+            .success-message.fade-out {
+                opacity: 0; /* Target opacity for fading out */
+            }
+
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 12px 16px;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        #preview {
+            display: none;
+            margin-top: 10px;
+            width: 100%; /* Fill the width of its container */
+            max-width: 150px; /* Restrict to a maximum width */
+            height: 150px; /* Fixed height for uniform appearance */
+            object-fit: cover; /* Ensure image covers area, crops if needed */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+      
+
+        
+    </style>
+</head>
+<body class="dashboard-bg">
+    <main>
+        <section class="category-glass-card">
+            <h1><span class="section-pill">Submit an Item</span></h1>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div id="successMessage" class="success-message">@TempData["SuccessMessage"]</div>
+            }
+            @if (!ModelState.IsValid)
+            {
+                <div class="error-message">
+                    <ul>
+                        @foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <form method="post" enctype="multipart/form-data" class="submit-item-form">
+                <div class="image-upload">
+                    <label for="item-image" class="upload-label">Upload</label>
+                    <input type="file" id="item-image" asp-for="ItemImage" accept="image/*" required />
+                    <img id="preview" src="#" alt="Image Preview" />
+                </div>
+
+                <div class="radio-container">
+                    <div class="radio-item">
+                        <input type="radio" id="lost" name="ItemStatus" value="lost" required onclick="toggleFields()" @(Model.ItemStatus == "lost" ? "checked" : "") />
+                        <label for="lost">I lost an item</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="found" name="ItemStatus" value="found" required onclick="toggleFields()" @(Model.ItemStatus == "found" ? "checked" : "") />
+                        <label for="found">I found an item</label>
+                    </div>
+                </div>
+
+                <label for="item-name">Item Name:</label>
+                <input type="text" id="item-name" asp-for="ItemName" required />
+
+                <label for="category">Category:</label>
+                <select id="category" asp-for="Category" required>
+                    <option value="">Select category</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="wallets">Wallets</option>
+                    <option value="bags">Bags</option>
+                    <option value="ids">IDs</option>
+                    <option value="documents">Documents</option>
+                    <option value="books">Books</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="fashion">Fashion Accessories</option>
+                    <option value="jewelry">Jewelry</option>
+                    <option value="others">Others</option>
+                </select>
+
+                <label>Date:</label>
+                <div class="date-input">
+                    <select id="month" asp-for="Month" required>
+                        <option value="">Month</option>
+                        @foreach (var month in Model.Months)
+                        {
+                            <option value="@month">@month</option>
+                        }
+                    </select>
+
+                    <select id="day" asp-for="Day" required>
+                        <option value="">Day</option>
+                        @for (int i = 1; i <= 31; i++)
+                        {
+                            var day = i.ToString("D2");
+                            <option value="@day">@day</option>
+                        }
+                    </select>
+
+                    <select id="year" asp-for="Year" required>
+                        <option value="">Year</option>
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                    </select>
+                </div>
+
+                <div id="found-fields">
+                    <label for="found-location">Where the item was found:</label>
+                    <input type="text" id="found-location" asp-for="FoundLocation" />
+
+                    <label for="pickup-location">Pickup Location:</label>
+                    <input type="text" id="pickup-location" value="PUP Main Guard House" class="form-control" readonly />
+                    <input type="hidden" asp-for="PickupLocation" value="PUP Main Guard House" /> @* This ensures the value is always sent *@
+                </div>
+
+                <div id="lost-fields">
+                    <label for="lost-location">Where the item was last seen:</label>
+                    <input type="text" id="lost-location" asp-for="LostLocation" />
+                </div>
+
+                <div id="lost-time-section">
+                    <label>When the item was last seen:</label>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <select id="lost-hour" asp-for="LostHour">
+                            <option value="">Hour</option>
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                <option value="@i.ToString("D2")">@i.ToString("D2")</option>
+                            }
+                        </select>
+                        <span>:</span>
+                        <select id="lost-minute" asp-for="LostMinute">
+                            <option value="">Minute</option>
+                            @for (int i = 0; i < 60; i++)
+                            {
+                                <option value="@i.ToString("D2")">@i.ToString("D2")</option>
+                            }
+                        </select>
+                        <select id="lost-am-pm" asp-for="LostAMPM">
+                            <option value="">AM/PM</option>
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="save-button">Save</button>
+            </form>
+        </section>
+    </main>
+
+    <div class="bottom-taskbar">
+        <div class="taskbar-group-card">
+            <div class="taskbar-pill home-pill" onclick="location.href='@Url.Page("/Index")'" style="cursor:pointer;">
+                <span class="icon home-icon">
+                    <img src="~/Assets/Home.png" alt="Home" width="32" height="32" />
+                </span>
+                <span class="label">Home</span>
+            </div>
+            <div onclick="location.href='@Url.Page("/About")'" class="taskbar-pill about-pill" style="cursor:pointer;">
+                <span class="icon about-icon">
+                    <img src="~/Assets/About Us.png" alt="About Us" width="32" height="32" />
+                </span>
+                <span class="label">About Us</span>
+            </div>
+            <div class="taskbar-pill profile-pill" onclick="location.href='@Url.Page("/Profile")'" style="cursor:pointer;">
+                <span class="icon profile-icon">
+                    <img src="~/Assets/Profile.png" alt="Profile" width="32" height="32" />
+                </span>
+                <span class="label">Profile</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleFields() {
+            const isLost = document.getElementById("lost").checked;
+
+            document.getElementById("lost-fields").style.display = isLost ? "block" : "none";
+            document.getElementById("lost-time-section").style.display = isLost ? "block" : "none";
+            document.getElementById("found-fields").style.display = !isLost ? "block" : "none";
+
+            // Set required attribute based on status
+            document.getElementById("lost-location").required = isLost;
+            document.getElementById("lost-hour").required = isLost;
+            document.getElementById("lost-minute").required = isLost;
+            document.getElementById("lost-am-pm").required = isLost;
+
+            document.getElementById("found-location").required = !isLost;
+            document.getElementById("pickup-location").required = !isLost;
+
+            // Clear values of hidden/non-required fields to prevent sending partial data
+            if (!isLost) { // If "found" is selected, clear lost fields
+                document.getElementById("lost-location").value = "";
+                document.getElementById("lost-hour").value = "";
+                document.getElementById("lost-minute").value = "";
+                document.getElementById("lost-am-pm").value = "";
+            } else { // If "lost" is selected, clear found fields
+                document.getElementById("found-location").value = "";
+                document.getElementById("pickup-location").value = "";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Initial call to set correct field visibility and required status
+            toggleFields();
+
+            // Add event listeners for radio button changes
+            document.querySelectorAll("input[name='ItemStatus']").forEach(radio => {
+                radio.addEventListener("change", toggleFields);
+            });
+
+            // Image preview logic
+            const imageInput = document.getElementById('item-image');
+            const preview = document.getElementById('preview');
+            imageInput.addEventListener('change', function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    preview.src = URL.createObjectURL(file);
+                    preview.style.display = 'block';
+                }
+            });
+
+            // --- Fade out success message ---
+            const successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                setTimeout(() => {
+                    successMessage.classList.add('fade-out');
+                }, 3000); // Start fading out after 3 seconds
+
+                // Remove the element completely after the transition
+                successMessage.addEventListener('transitionend', () => {
+                    successMessage.remove();
+                });
+            }
+        });
+    </script>
+
+    <script src="~/js/taskbar.js" asp-append-version="true"></script>
+
+</body>
+</html>
